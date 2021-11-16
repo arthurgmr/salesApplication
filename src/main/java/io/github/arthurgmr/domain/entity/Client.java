@@ -1,7 +1,16 @@
 package io.github.arthurgmr.domain.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "client")
 public class Client {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Integer id;
+
+    @Column
     private String name;
 
     public Client() {

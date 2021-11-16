@@ -1,7 +1,7 @@
 package io.github.arthurgmr;
 
 import io.github.arthurgmr.domain.entity.Client;
-import io.github.arthurgmr.domain.repository.ClientRepository;
+import io.github.arthurgmr.domain.repository.IClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,12 +17,12 @@ import java.util.List;
 public class SalesApplication {
 
     @Bean
-    public CommandLineRunner init(@Autowired ClientRepository client) {
+    public CommandLineRunner init(@Autowired IClientRepository client) {
         return args -> {
             client.save(new Client("Arthur"));
             client.save(new Client("Nara"));
 
-            List<Client> allClients = client.getAll();
+            List<Client> allClients = client.findAll();
             allClients.forEach(System.out::println);
         };
     }
