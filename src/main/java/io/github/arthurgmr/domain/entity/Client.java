@@ -1,6 +1,7 @@
 package io.github.arthurgmr.domain.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -13,7 +14,21 @@ public class Client {
     @Column
     private String name;
 
+    //get all client orders;
+    //can use "fetch" to get always client data;
+    //fetch = FetchType.EAGER, default is LAZY;
+    @OneToMany( mappedBy = "client")
+    private Set<ClientOrder> client_orders;
+
     public Client() {
+    }
+
+    public Set<ClientOrder> getClient_orders() {
+        return client_orders;
+    }
+
+    public void setClient_orders(Set<ClientOrder> client_orders) {
+        this.client_orders = client_orders;
     }
 
     public Client(Integer id, String name) {

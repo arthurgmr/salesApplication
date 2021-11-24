@@ -25,4 +25,8 @@ public interface IClientRepository extends JpaRepository<Client, Integer> {
     @Query(value = "delete from Client client where client.name = :name")
     @Modifying
     void deleteForExample(String name);
+
+    //Create method to get client data with your orders;
+    @Query(value = "select client from Client client left join fetch client.client_orders where client.id = :id")
+    Client findClientWithOrders( @Param("id") Integer id);
 }
