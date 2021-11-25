@@ -1,5 +1,7 @@
 package io.github.arthurgmr.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ public class Client {
     //get all client orders;
     //can use "fetch" to get always client data;
     //fetch = FetchType.EAGER, default is LAZY;
+    @JsonIgnore
     @OneToMany( mappedBy = "client")
     private Set<ClientOrder> client_orders;
 
