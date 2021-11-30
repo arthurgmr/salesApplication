@@ -16,6 +16,9 @@ public class Client {
     @Column
     private String name;
 
+    @Column(name = "cpf", length = 11)
+    private String cpf;
+
     //get all client orders;
     //can use "fetch" to get always client data;
     //fetch = FetchType.EAGER, default is LAZY;
@@ -57,6 +60,14 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     @Override
