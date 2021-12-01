@@ -60,7 +60,7 @@ public class ClientController {
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateClient(@PathVariable Integer id,
-                                       @RequestBody Client clientUpdated) {
+                             @RequestBody Client clientUpdated) {
         clientRepository
                 .findById(id)
                 .map(clientExists -> {
