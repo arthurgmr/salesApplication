@@ -1,12 +1,18 @@
 package io.github.arthurgmr.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "client")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,9 +32,6 @@ public class Client {
     @OneToMany( mappedBy = "client")
     private Set<ClientOrder> client_orders;
 
-    public Client() {
-    }
-
     public Set<ClientOrder> getClient_orders() {
         return client_orders;
     }
@@ -40,41 +43,5 @@ public class Client {
     public Client(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Client(String name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

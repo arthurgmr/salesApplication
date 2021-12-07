@@ -1,10 +1,17 @@
 package io.github.arthurgmr.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "item_order")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class ItemOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,39 +32,4 @@ public class ItemOrder {
     @Column
     private LocalDate created_at;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public ClientOrder getClient_order_id() {
-        return client_order;
-    }
-
-    public Product getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(Product product_id) {
-        this.product_id = product_id;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public LocalDate getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDate created_at) {
-        this.created_at = created_at;
-    }
 }
