@@ -11,11 +11,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder //
 public class ResponseOrderDTO {
     private Integer code;
     private String nameClient;
     private String cpf;
+    private String status;
+    private String date;
     private BigDecimal total;
     private List<ResponseItemOrderDTO> items;
 

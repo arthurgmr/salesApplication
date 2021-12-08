@@ -1,5 +1,6 @@
 package io.github.arthurgmr.domain.entity;
 
+import io.github.arthurgmr.domain.enums.StatusOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,10 @@ public class ClientOrder {
     //scale is the quantity decimal house;
     @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusOrder status;
 
     //get items of client order;
     @OneToMany(mappedBy = "client_order")

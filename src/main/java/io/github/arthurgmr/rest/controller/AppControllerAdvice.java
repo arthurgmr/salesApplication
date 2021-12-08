@@ -1,6 +1,7 @@
 package io.github.arthurgmr.rest.controller;
 
 import io.github.arthurgmr.exception.NegotiateRule;
+import io.github.arthurgmr.exception.OrderNotFound;
 import io.github.arthurgmr.rest.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,5 +17,11 @@ public class AppControllerAdvice {
     public ApiError handleNegotiateRule (NegotiateRule ex) {
         String messageError = ex.getMessage();
         return new ApiError(messageError);
+    }
+
+    @ExceptionHandler(OrderNotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleOrderNotFound (OrderNotFound ex) {
+        return new ApiError(ex.getMessage());
     }
 }
