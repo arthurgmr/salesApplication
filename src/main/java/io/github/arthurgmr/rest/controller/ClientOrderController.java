@@ -9,6 +9,8 @@ import io.github.arthurgmr.service.IOrderService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
@@ -23,7 +25,7 @@ public class ClientOrderController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Integer saveOrder(@RequestBody OrderDTO dataOrder) {
+    public Integer saveOrder(@RequestBody @Valid OrderDTO dataOrder) {
         ClientOrder order = service.save(dataOrder);
         return order.getId();
     }
