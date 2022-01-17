@@ -6,7 +6,6 @@ import io.github.arthurgmr.rest.dto.ChangeOrderStatusDTO;
 import io.github.arthurgmr.rest.dto.OrderDTO;
 import io.github.arthurgmr.rest.dto.ResponseOrderDTO;
 import io.github.arthurgmr.service.IOrderService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

@@ -2,7 +2,6 @@ package io.github.arthurgmr.service;
 
 import io.github.arthurgmr.domain.entity.ClientOrder;
 import io.github.arthurgmr.domain.enums.StatusOrder;
-import io.github.arthurgmr.rest.dto.ChangeOrderStatusDTO;
 import io.github.arthurgmr.rest.dto.OrderDTO;
 import io.github.arthurgmr.rest.dto.ResponseOrderDTO;
 
