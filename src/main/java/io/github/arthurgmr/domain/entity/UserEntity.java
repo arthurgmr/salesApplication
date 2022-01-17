@@ -26,7 +26,7 @@ public class UserEntity {
     private Integer id;
 
     @Column
-    @NotEmpty(message = "{username.required}")
+    @NotEmpty(message = "{login.required}")
     private String login;
 
     @Column

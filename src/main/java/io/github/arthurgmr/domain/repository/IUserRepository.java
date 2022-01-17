@@ -8,5 +8,5 @@ import io.github.arthurgmr.domain.entity.UserEntity;
 
 public interface IUserRepository extends JpaRepository<UserEntity, Integer> {
     
-    Optional<UserEntity> findByUser (String login);
+    Optional<UserEntity> findByLogin(String login);
 }
