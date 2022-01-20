@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SalesApplication<sales>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "io.github.arthurgmr.SalesApplication",
+            "projectName": "sales",
+            "args": ""
+        }
+    ]
+}

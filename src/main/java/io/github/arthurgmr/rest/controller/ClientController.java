@@ -78,7 +78,7 @@ public class ClientController {
                                     .withIgnoreCase() //ignore letter case;
                                     .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); // matching with containing words;
         // set information of filter with matcher config;
-        Example example = Example.of(filter, matcher);
+        Example<Client> example = Example.of(filter, matcher);
 
         List<Client> result = clientRepository.findAll(example);
         return result;

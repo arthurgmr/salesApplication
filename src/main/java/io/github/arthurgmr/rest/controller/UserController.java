@@ -3,15 +3,20 @@ package io.github.arthurgmr.rest.controller;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import io.github.arthurgmr.domain.entity.UserEntity;
-import io.github.arthurgmr.domain.repository.IUserRepository;
+import io.github.arthurgmr.exception.PasswordInvalidException;
+import io.github.arthurgmr.rest.dto.CredentialsDTO;
+import io.github.arthurgmr.rest.dto.TokenDTO;
+import io.github.arthurgmr.security.JWTService;
+import io.github.arthurgmr.service.implementation.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,18 +28,32 @@ public class UserController {
     // public UserController(IUserRepository userRepository) {
     //     this.userRepository = userRepository;
     // }
-    private final IUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserServiceImpl userService;
+    private final JWTService JWTService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public UserEntity saveUser(@RequestBody @Valid UserEntity dataUser) {
-        // crypt password;
-        String passwordHash = passwordEncoder.encode(dataUser.getPassword());
-        dataUser.setPassword(passwordHash);
-        // save user;
-        UserEntity user = userRepository.save(dataUser);
-        return user;
+    public UserEntity save(@RequestBody @Valid UserEntity dataUser) {
+        return userService.saveAndCryptPass(dataUser);
+    }
+
+    @PostMapping("/auth")
+    public TokenDTO authenticate (@RequestBody CredentialsDTO credentials) {
+        try {
+            UserEntity user = UserEntity.builder()
+                .login(credentials.getLogin())
+                .password(credentials.getPassword())
+                .build();  
+
+            userService.authenticate(user);
+
+            String token = JWTService.genToken(user);
+
+            return new TokenDTO(user.getLogin(), token);
+
+        } catch (UsernameNotFoundException | PasswordInvalidException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
     }
 
 
