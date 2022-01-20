@@ -2,3 +2,5 @@
 /shelf/
 /workspace.xml
 application.properties
+.vscode
+.idea
