@@ -1,6 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-application.properties
 .vscode
 .idea
+application.properties
+application-test.properties

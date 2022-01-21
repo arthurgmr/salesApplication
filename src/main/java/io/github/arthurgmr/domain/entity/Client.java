@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "client")
@@ -17,9 +20,10 @@ import java.util.Set;
 @Data
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column
-    private Integer id;
+    private UUID id;
 
     @Column
     @NotEmpty(message = "{name.required}")
@@ -45,7 +49,7 @@ public class Client {
         this.client_orders = client_orders;
     }
 
-    public Client(Integer id, String name) {
+    public Client(UUID id, String name) {
         this.id = id;
         this.name = name;
     }

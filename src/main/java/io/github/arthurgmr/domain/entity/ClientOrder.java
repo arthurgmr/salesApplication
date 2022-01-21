@@ -18,7 +18,7 @@ import java.util.List;
 public class ClientOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     //get client data

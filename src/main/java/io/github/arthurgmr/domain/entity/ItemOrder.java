@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Data
 public class ItemOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
