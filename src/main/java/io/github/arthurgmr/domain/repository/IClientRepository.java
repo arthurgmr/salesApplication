@@ -8,8 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 
 import java.util.List;
+import java.util.UUID;
 
-public interface IClientRepository extends JpaRepository<Client, Integer> {
+public interface IClientRepository extends JpaRepository<Client, UUID> {
     //Create automatic method through the name;
     List<Client> findByNameLike (String name);
 

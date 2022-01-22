@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,7 +49,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public ClientOrder save(OrderDTO dataOrder) {
-        Integer clientId = dataOrder.getClient_id();
+        UUID clientId = dataOrder.getClient_id();
         Client client = clientRepository
                 .findById(clientId)
                 .orElseThrow(() -> new NegotiateRule("Client not found!"));

@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/client")
@@ -24,7 +25,7 @@ public class ClientController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Client getClientById( @PathVariable Integer id ) {
+    public Client getClientById( @PathVariable UUID id ) {
 // CAN BE DONE THIS WAY
 //        Optional<Client> client =  clientRepository.findById(id);
 //        if(client.isPresent()) {
@@ -47,7 +48,7 @@ public class ClientController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteClient (@PathVariable Integer id) {
+    public void deleteClient (@PathVariable UUID id) {
         Optional<Client> client =  clientRepository.findById(id);
         if(client.isPresent()) {
             clientRepository.delete(client.get());
@@ -58,7 +59,7 @@ public class ClientController {
 
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateClient(@PathVariable @Valid Integer id,
+    public void updateClient(@PathVariable @Valid UUID id,
                              @RequestBody Client clientUpdated) {
         clientRepository
                 .findById(id)
