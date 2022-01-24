@@ -23,6 +23,13 @@ public class ClientController {
         this.clientRepository = clientRepository;
     }
 
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client saveClient(@RequestBody @Valid Client dataClient) {
+        Client client = clientRepository.save(dataClient);
+        return client;
+    }
+
     @GetMapping("/{id}")
     @ResponseBody
     public Client getClientById( @PathVariable UUID id ) {
@@ -37,13 +44,6 @@ public class ClientController {
         return  clientRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found!"));
-    }
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public Client saveClient(@RequestBody @Valid Client dataClient) {
-        Client client = clientRepository.save(dataClient);
-        return client;
     }
 
     @DeleteMapping("/{id}")

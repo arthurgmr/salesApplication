@@ -32,14 +32,14 @@ public class ClientOrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseOrderDTO getOrder(@PathVariable Integer id) {
+    public ResponseOrderDTO getOrder(@PathVariable UUID id) {
         ResponseOrderDTO order = service.getOrder(id);
         return order;
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
-    public void changeStatusOrder(@PathVariable Integer id,
+    public void changeStatusOrder(@PathVariable UUID id,
                                   @RequestBody ChangeOrderStatusDTO statusOrder) {
         String newStatus = statusOrder.getNewStatus();
         service.changeStatusOrder(id, StatusOrder.valueOf(newStatus));

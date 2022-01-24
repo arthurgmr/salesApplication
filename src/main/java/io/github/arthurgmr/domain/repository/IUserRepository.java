@@ -7,9 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import io.github.arthurgmr.domain.entity.UserEntity;
 
-public interface IUserRepository extends JpaRepository<UserEntity, Integer> {
+public interface IUserRepository extends JpaRepository<UserEntity, UUID> {
     
     Optional<UserEntity> findByLogin(String login);
 
-    Optional<UserEntity> findById(UUID id);
 }

@@ -78,7 +78,7 @@ public class OrderServiceImpl implements IOrderService {
         return items
                 .stream()
                 .map( item -> {
-                    Integer productId = item.getProduct_id();
+                    UUID productId = item.getProduct_id();
                     Product product = productRepository
                             .findById(productId)
                             .orElseThrow(() -> new NegotiateRule("Product not found! product_id: "+ productId));
@@ -93,7 +93,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public ResponseOrderDTO getOrder(Integer id) {
+    public ResponseOrderDTO getOrder(UUID id) {
         return orderRepository
                 .findByIdFetchItems(id)
                 .map(order -> convertOrderDTO(order))
@@ -134,7 +134,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     @Transactional
-    public void changeStatusOrder(Integer id, StatusOrder status) {
+    public void changeStatusOrder(UUID id, StatusOrder status) {
         orderRepository
                 .findById(id)
                 .map(order -> {

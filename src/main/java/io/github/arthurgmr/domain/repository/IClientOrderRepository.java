@@ -10,14 +10,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface IClientOrderRepository extends JpaRepository<ClientOrder, Integer> {
+public interface IClientOrderRepository extends JpaRepository<ClientOrder, UUID> {
     //Create method to return all orders of one client;
     List<ClientOrder> findByClient(Client client);
 
     //Crate method to return an order with items;
     //This case, was use HQL Query;
     @Query(" select o from ClientOrder o left join fetch o.items where o.id = :id ")
-    Optional<ClientOrder> findByIdFetchItems(@Param("id") Integer id);
+    Optional<ClientOrder> findByIdFetchItems(@Param("id") UUID id);
 
-    Optional<ClientOrder> findById( UUID id);
 }
