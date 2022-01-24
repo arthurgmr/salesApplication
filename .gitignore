@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 .vscode
-.idea
+.idea/
 application.properties
 application-test.properties
 target/
