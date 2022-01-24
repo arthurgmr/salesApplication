@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "product")
@@ -17,7 +18,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private UUID id;
 
     @Column(name = "description")
     @NotEmpty(message = "{description.required}")

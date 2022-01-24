@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -32,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Product getProductById (@PathVariable Integer id) {
+    public Product getProductById (@PathVariable UUID id) {
         Optional<Product> product = productRepository.findById(id);
         if(product.isPresent()) {
             return product.get();
@@ -43,7 +44,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
-    public void updateProduct(@PathVariable @Valid Integer id, @RequestBody Product productUpdated) {
+    public void updateProduct(@PathVariable @Valid UUID id, @RequestBody Product productUpdated) {
         productRepository
                 .findById(id)
                 .map(productExists -> {
@@ -55,7 +56,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
-    public void deleteProduct (@PathVariable Integer id) {
+    public void deleteProduct (@PathVariable UUID id) {
         productRepository
                 .findById(id)
                 .map(product -> {
