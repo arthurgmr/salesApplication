@@ -12,6 +12,8 @@ import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/order")
 public class ClientOrderController {
@@ -24,7 +26,7 @@ public class ClientOrderController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Integer saveOrder(@RequestBody @Valid OrderDTO dataOrder) {
+    public UUID saveOrder(@RequestBody @Valid OrderDTO dataOrder) {
         ClientOrder order = service.save(dataOrder);
         return order.getId();
     }

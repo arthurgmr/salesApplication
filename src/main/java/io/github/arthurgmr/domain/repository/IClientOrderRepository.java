@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface IClientOrderRepository extends JpaRepository<ClientOrder, Integer> {
     //Create method to return all orders of one client;
@@ -17,4 +18,6 @@ public interface IClientOrderRepository extends JpaRepository<ClientOrder, Integ
     //This case, was use HQL Query;
     @Query(" select o from ClientOrder o left join fetch o.items where o.id = :id ")
     Optional<ClientOrder> findByIdFetchItems(@Param("id") Integer id);
+
+    Optional<ClientOrder> findById( UUID id);
 }

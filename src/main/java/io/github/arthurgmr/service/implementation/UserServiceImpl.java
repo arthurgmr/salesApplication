@@ -1,5 +1,7 @@
 package io.github.arthurgmr.service.implementation;
 
+import java.util.UUID;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,18 @@ public class UserServiceImpl implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    public UserEntity saveAndCryptPass(UserEntity dataUser) {
+    public UserEntity saveUser(UserEntity dataUser) {
         // crypt password;
         String passwordHash = passwordEncoder.encode(dataUser.getPassword());
         dataUser.setPassword(passwordHash);
         // save user;
         UserEntity user = userRepository.save(dataUser);
         return user;
+    }
+
+    @Transactional
+    public UserEntity getUser(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
     }
 
 
