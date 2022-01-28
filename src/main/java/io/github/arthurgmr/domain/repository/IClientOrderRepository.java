@@ -19,4 +19,5 @@ public interface IClientOrderRepository extends JpaRepository<ClientOrder, UUID>
     @Query(" select o from ClientOrder o left join fetch o.items where o.id = :id ")
     Optional<ClientOrder> findByIdFetchItems(@Param("id") UUID id);
 
+    
 }

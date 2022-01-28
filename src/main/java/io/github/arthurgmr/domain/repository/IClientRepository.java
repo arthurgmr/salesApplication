@@ -30,4 +30,6 @@ public interface IClientRepository extends JpaRepository<Client, UUID> {
     //Create method to get client data with your orders;
     @Query(value = "select client from Client client left join fetch client.client_orders where client.id = :id")
     Client findClientWithOrders( @Param("id") Integer id);
+
+    Client findByCpf (String cpf);
 }

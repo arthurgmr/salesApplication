@@ -1,88 +1,55 @@
 package io.github.arthurgmr.rest.controller;
 
 import io.github.arthurgmr.domain.entity.Client;
-import io.github.arthurgmr.domain.repository.IClientRepository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import io.github.arthurgmr.service.IClientService;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/client")
+@RequiredArgsConstructor
 public class ClientController {
 
-    private IClientRepository clientRepository;
+    // private IClientRepository clientRepository;
 
-    public ClientController(IClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+    private final IClientService clientService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Client saveClient(@RequestBody @Valid Client dataClient) {
-        Client client = clientRepository.save(dataClient);
+        Client client = clientService.saveClinet(dataClient);
         return client;
     }
 
     @GetMapping("/{id}")
     @ResponseBody
     public Client getClientById( @PathVariable UUID id ) {
-// CAN BE DONE THIS WAY
-//        Optional<Client> client =  clientRepository.findById(id);
-//        if(client.isPresent()) {
-//            return client.get();
-//        }
-//        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found!");
-
-// OR THIS ANOTHER WAY
-        return  clientRepository
-                .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found!"));
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteClient (@PathVariable UUID id) {
-        Optional<Client> client =  clientRepository.findById(id);
-        if(client.isPresent()) {
-            clientRepository.delete(client.get());
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found!");
-        }
+        return clientService.getClient(id);
     }
 
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateClient(@PathVariable @Valid UUID id,
-                             @RequestBody Client clientUpdated) {
-        clientRepository
-                .findById(id)
-                .map(clientExists -> {
-                    clientUpdated.setId(clientExists.getId());
-                    clientRepository.save(clientUpdated);
-                    return clientExists;
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found!"));
-    }
+                             @RequestBody Client dataClient) {
+                                 clientService.updateClient(id, dataClient);
+                             }
+
 
     @GetMapping("/find")
     public List<Client> findClient (Client filter) {
-        // creating matcher to find Client;
-        // using ExampleMatcher of SpringFramework;
-        ExampleMatcher matcher = ExampleMatcher
-                                    .matching() // execute the match;
-                                    .withIgnoreCase() //ignore letter case;
-                                    .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); // matching with containing words;
-        // set information of filter with matcher config;
-        Example<Client> example = Example.of(filter, matcher);
+        return clientService.findClient(filter);
 
-        List<Client> result = clientRepository.findAll(example);
-        return result;
+    }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteClient (@PathVariable UUID id) {
+        clientService.deleteClient(id);
     }
 }
