@@ -5,7 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "item_order")
@@ -14,9 +18,10 @@ import java.time.LocalDate;
 @Data
 public class ItemOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id")
-    private Integer id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "client_order_id")

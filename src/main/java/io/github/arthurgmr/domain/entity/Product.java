@@ -5,7 +5,13 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,7 +22,8 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id")
     private UUID id;
 
@@ -24,7 +31,15 @@ public class Product {
     @NotEmpty(message = "{description.required}")
     private String description;
 
-    @Column(name = "unit_price")
+    @Column(name = "unit_price", precision = 20, scale = 2)
     @NotNull(message = "{price.required}")
     private BigDecimal unit_price;
+
+    @Column
+    @CreationTimestamp
+    private LocalDate created_at;
+
+    @Column
+    @UpdateTimestamp
+    private LocalDate updated_at;
 }
