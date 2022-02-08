@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.arthurgmr</groupId>
-    <artifactId>sales</artifactId>
+    <artifactId>salesApplication</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <!--    config to set start spring boot app-->
@@ -75,6 +75,18 @@
             <version>0.9.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -84,11 +96,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+   </build>
 
 </project>
