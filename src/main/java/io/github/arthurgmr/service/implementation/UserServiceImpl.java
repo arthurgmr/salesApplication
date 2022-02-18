@@ -15,24 +15,25 @@ import org.springframework.stereotype.Service;
 import io.github.arthurgmr.domain.entity.UserEntity;
 import io.github.arthurgmr.domain.repository.IUserRepository;
 import io.github.arthurgmr.exception.PasswordInvalidException;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserDetailsService {
     
-    @Autowired
-    private IUserRepository userRepository;
+    private final IUserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    public UserEntity saveUser(UserEntity dataUser) {
+    public UserEntity saveUser(UserEntity dataUser) {     
         // crypt password;
         String passwordHash = passwordEncoder.encode(dataUser.getPassword());
         dataUser.setPassword(passwordHash);
         // save user;
-        UserEntity user = userRepository.save(dataUser);
-        return user;
+        return userRepository.save(dataUser);
     }
 
     @Transactional

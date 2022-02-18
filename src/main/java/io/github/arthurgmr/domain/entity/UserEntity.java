@@ -40,4 +40,10 @@ public class UserEntity {
     @Column
     // @NotEmpty(message = "{role.required}")
     private boolean admin;
+
+    public UserEntity(String login, String password, Boolean admin) {
+        this.login = login;
+        this.password = password;
+        this.admin = admin;
+    }
 }

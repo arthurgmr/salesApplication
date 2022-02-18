@@ -49,8 +49,8 @@ public class Client {
         this.client_orders = client_orders;
     }
 
-    public Client(UUID id, String name) {
-        this.id = id;
+    public Client(String name, String cpf) {
         this.name = name;
+        this.cpf = cpf;
     }
 }
